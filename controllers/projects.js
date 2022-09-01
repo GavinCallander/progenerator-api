@@ -4,7 +4,9 @@ const router = require('express').Router();
 // create a new project
 // this will be useful when adding the data from json to the database
 router.post('/', (req, res) => {
-    // some code here
+
+    
+
 });
 
 // get all projects
