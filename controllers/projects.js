@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     .populate('tech')
     .populate('types')
     .then(projects => res.send(projects))
-    .catch(err => res.send(err));
+    .catch(err => res.send(err))
 });
 
 module.exports = router;
