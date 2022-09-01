@@ -13,7 +13,7 @@ const projectSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Tech'
     },
-    type: {
+    types: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Type'
     },
