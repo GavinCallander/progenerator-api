@@ -1,41 +1,35 @@
-const db = require('../models');
+const Project = require('../models/project');
 const router = require('express').Router();
 
-// create a new project
-// this will be useful when adding the data from json to the database
+// test the route
 router.post('/', (req, res) => {
-    // data is split into string and ref
-    console.log("Hit the route")
-    // findOrCreate - error if find
-    db.Project.findOne()
-    .then(project => {
-        console.log("In the then")
-        if (project) {
-            console.log("In the project");
-            return res.status(409).send({ message: "A project, wuuut?"});
+    console.log("Hit the route");
+    console.log(req.body);
+    let project = new Project({
+        name: req.body.name,
+        description: req.body.description
+    })
+    console.log(project);
+    project.save((err, project) => {
+        console.log('saving, allegedly');
+        if (err) {
+            res.json({ type: 'error', message: 'error creating project'});
+            console.log(err);
         }
         else {
-            console.log("In the not project");
-            return res.send("No project exists");
+            console.log('success');
+            res.status(200).json({ type: 'success', project: project.toObject() })
         }
     })
-
-    // loop through data being passed for each variable
-
-            // findOrCreate for each in their respective dbs
-
-    // once done, send confirmation
-
 });
 
-// get all projects
-router.get('/', (req, res) => {
-    db.Project.find()
-    .populate('resources')
-    .populate('tech')
-    .populate('types')
-    .then(projects => res.send(projects))
-    .catch(err => res.send(err))
-});
+// router.get('/', (req, res) => {
+//     db.Project.find()
+//     .populate('resources')
+//     .populate('tech')
+//     .populate('types')
+//     .then(projects => res.send(projects))
+//     .catch(err => res.send(err))
+// });
 
 module.exports = router;
