@@ -9,14 +9,18 @@ const projectSchema = new mongoose.Schema({
         type: String,
         required: [true, "description is a required field"]
     },
-    tech: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Tech'
-    },
-    types: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Type'
-    },
+    tech: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Tech'
+        }
+    ],
+    types: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Type'
+        }
+    ],
     resources: [
         {
             type: mongoose.Schema.Types.ObjectId,
